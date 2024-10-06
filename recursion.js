@@ -25,3 +25,27 @@ function fibsRec(length) {
 }
 
 console.log(fibsRec(8));
+
+function merge(leftArray, rightArray) {
+  let sortedArray = [];
+  while (leftArray.length && rightArray.length) {
+    if (leftArray[0] < rightArray[0]) {
+      sortedArray.push(leftArray.shift());
+    } else {
+      sortedArray.push(rightArray.shift());
+    }
+  }
+  return [...sortedArray, ...leftArray, ...rightArray];
+}
+
+function mergeSort(array) {
+  if (array.length === 1) {
+    return array;
+  }
+  let mid = Math.floor(array.length / 2);
+  let leftArray = array.slice(0, mid);
+  let rightArray = array.slice(mid, array.length);
+  return merge(mergeSort(leftArray), mergeSort(rightArray));
+}
+
+console.log(mergeSort([3, 2, 1, 13, 8, 5, 0, 1]));
